@@ -1,15 +1,15 @@
 import { Task } from '../../model/Task.model';
-import { Checkbox } from '../Checkbox/Checkbox.style';
-import { TaskList, TaskText } from './Tasks.style';
+import { Checkbox } from '../Checkbox/Checkbox';
+import './Tasks.css';
 
 type TasksProps = {
   tasks: Task[];
   onChange: (taskId: number) => void;
 };
 
-export const Tasks: React.FC<TasksProps> = ({ tasks, onChange }) => {
+export function Tasks({ tasks, onChange }: TasksProps) {
   return (
-    <TaskList>
+    <ul className='task-list'>
       {tasks.map(task => (
         <li key={task.id}>
           <Checkbox
@@ -17,9 +17,11 @@ export const Tasks: React.FC<TasksProps> = ({ tasks, onChange }) => {
             checked={task.completed}
             onChange={() => onChange(task.id)}
           />
-          <TaskText completed={task.completed}>{task.text}</TaskText>
+          <span className={`task-text ${task.completed ? 'task-completed' : ''}`}>
+            {task.text}
+          </span>
         </li>
       ))}
-    </TaskList>
+    </ul>
   );
-};
+}

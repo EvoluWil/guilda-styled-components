@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 
 import { AlertMessage } from './components/AlertMessage/AlertMessage';
 import { Task } from './model/Task.model';
@@ -11,12 +10,6 @@ type Alert = {
   type: 'SUCCESS' | 'ERROR';
   message: string;
 };
-
-const Container = styled.div`
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-`;
 
 const App = (): JSX.Element => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -48,7 +41,7 @@ const App = (): JSX.Element => {
   };
 
   return (
-    <Container>
+    <div className='container'>
       <h1>Minhas Tarefas</h1>
       <Input
         type="text"
@@ -61,7 +54,7 @@ const App = (): JSX.Element => {
       <Button onClick={handleAddTask}>Adicionar Tarefa</Button>
       {alert && <AlertMessage type={alert.type}>{alert.message}</AlertMessage>}
       <Tasks tasks={tasks} onChange={handleTaskComplete} />
-    </Container>
+    </div>
   );
 };
 
